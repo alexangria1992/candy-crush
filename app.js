@@ -71,6 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // drop candies once some have been cleared
+  function moveDown() {
+    for (let i = 0; i < 55; i++) {
+      if (squares[i + width].style.backgroundColor === "") {
+        squares[i + width].style.backgroundColor =
+          squares[i].style.backgroundColor;
+        squares[i].style.backgroundColor = "";
+      }
+    }
+  }
+
   // Checking for matches
   // Check for row of three
   function checkRowForFour() {
@@ -175,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
   checkColumnForThree();
 
   window.setInterval(function () {
+    moveDown();
     checkRowForFour();
     checkColumnForFour();
     checkRowForThree();
