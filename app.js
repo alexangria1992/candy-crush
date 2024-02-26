@@ -78,6 +78,12 @@ document.addEventListener("DOMContentLoaded", () => {
         squares[i + width].style.backgroundColor =
           squares[i].style.backgroundColor;
         squares[i].style.backgroundColor = "";
+        const firstRow = [0, 1, 2, 3, 4, 5, 6, 7];
+        const isFirstRow = firstRow.includes(i);
+        if (isFirstRow && squares[i].style.backgroundColor === "") {
+          let randomColor = Math.random() * candyColors.length;
+          squares[i].style.backgroundColor = candyColors[randomColor];
+        }
       }
     }
   }
@@ -114,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Check for column of three
   function checkColumnForFour() {
-    for (i = 0; i < 47; i++) {
+    for (i = 0; i < 39; i++) {
       let columnOfFour = [i, i + width, i + width * 2, i + width * 3];
       let decidedColor = squares[i].style.backgroundColor;
       const isBlank = squares[i].style.backgroundColor === "";
