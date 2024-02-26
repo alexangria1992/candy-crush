@@ -37,10 +37,13 @@ document.addEventListener("DOMContentLoaded", () => {
     squareIdBeingDragged = parseInt(this.id);
     console.log(this.id, "dragstart");
   }
-  function dragOver() {
+  function dragOver(e) {
+    e.preventDefault();
     console.log(this.id, "dragover");
   }
-  function dragEnter() {
+  function dragEnter(e) {
+    e.preventDefault();
+
     console.log(this.id, "dragenter");
   }
   function dragLeave() {
@@ -53,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(this.id, "dragDrop");
     colorBeingReplaced = this.style.backgroundColor;
     squareIdBeingReplaced = parseInt(this.id);
+    this.style.backgroundColor = colorBeingDragged;
     squares[squareIdBeingDragged].style.backgroundColor = colorBeingReplaced;
   }
 });
