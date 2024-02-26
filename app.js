@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const width = 8;
   const squares = [];
   const candyColors = ["red", "yellow", "purple", "green", "blue"];
+  let score = 0;
 
   // create board
   function createBoard() {
@@ -69,6 +70,31 @@ document.addEventListener("DOMContentLoaded", () => {
       squares[squareIdBeingDragged].style.backgroundColor = colorBeingDragged;
     }
   }
+
+  // Checking for matches
+  // Check for row of three
+  function checkRowForThree() {
+    for (i = 0; i < 61; i++) {
+      let rowOfThree = [i, i + 1, i + 2];
+      let decidedColor = squares[i].style.backgroundColor;
+      const isBlank = squares[i].style.backgroundColor === "";
+
+      if (
+        rowOfThree.every(
+          (index) =>
+            squares[index].style.backgroundColor === decidedColor && !isBlank
+        )
+      ) {
+        score += 3;
+        rowOfThree.forEach((index) => {
+          squares[index].style.backgroundColor = "";
+        });
+      }
+    }
+  }
+
+  checkRowForThree();
+
   function dragDrop() {
     console.log(this.id, "dragDrop");
     colorBeingReplaced = this.style.backgroundColor;
